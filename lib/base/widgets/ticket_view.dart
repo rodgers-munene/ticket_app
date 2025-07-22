@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:ticket_app/base/res/styles/app_styles.dart';
+import 'package:ticket_app/base/widgets/app_column_text_layout.dart';
 import 'package:ticket_app/base/widgets/app_layout_builder.dart';
 import 'package:ticket_app/base/widgets/big_circle.dart';
 import 'package:ticket_app/base/widgets/big_dot.dart';
+import 'package:ticket_app/base/widgets/text_style_fourth.dart';
+import 'package:ticket_app/base/widgets/text_style_third.dart';
 
 class TicketView extends StatelessWidget {
-  const TicketView({super.key});
+  final Map<String, dynamic> ticket;
+  const TicketView({super.key, required this.ticket});
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +37,7 @@ class TicketView extends StatelessWidget {
                   // show departure and destination with icons
                   Row(
                     children: [
-                      Text(
-                        "NYC",
-                        style: AppStyles.headLineStyle3.copyWith(
-                          color: Colors.white,
-                        ),
-                      ),
+                      TextStyleThird(text: ticket["from"]["code"]),
                       Expanded(child: Container()),
                       BigDot(),
                       Expanded(
@@ -62,36 +61,25 @@ class TicketView extends StatelessWidget {
                       ),
                       BigDot(),
                       Expanded(child: Container()),
-                      Text(
-                        "LDN",
-                        style: AppStyles.headLineStyle3.copyWith(
-                          color: Colors.white,
-                        ),
-                      ),
+                      TextStyleThird(text: ticket["to"]["code"]),
                     ],
                   ),
                   SizedBox(height: 3),
                   // show departure and destination with time
                   Row(
                     children: [
-                      Text(
-                        "aaa",
-                        style: AppStyles.headLineStyle4.copyWith(
-                          color: Colors.white,
-                        ),
+                      SizedBox(
+                        width: 100,
+                        child: TextStyleFourth(text: ticket["from"]["name"]),
                       ),
                       Expanded(child: Container()),
-                      Text(
-                        "8H 30M",
-                        style: AppStyles.headLineStyle4.copyWith(
-                          color: Colors.white,
-                        ),
-                      ),
+                      TextStyleFourth(text: ticket["flying_time"]),
                       Expanded(child: Container()),
-                      Text(
-                        "bbb",
-                        style: AppStyles.headLineStyle4.copyWith(
-                          color: Colors.white,
+                      SizedBox(
+                        width: 100,
+                        child: TextStyleFourth(
+                          text: ticket["to"]["name"],
+                          align: TextAlign.end,
                         ),
                       ),
                     ],
@@ -105,9 +93,11 @@ class TicketView extends StatelessWidget {
               color: AppStyles.ticketOrange,
               child: Row(
                 children: [
-                  BigCircle(isRight: true,),
-                  Expanded(child: AppLayoutBuilder(randomDivider: 16, width: 6,)),
-                  BigCircle(isRight: false)
+                  BigCircle(isRight: true),
+                  Expanded(
+                    child: AppLayoutBuilder(randomDivider: 16, width: 6),
+                  ),
+                  BigCircle(isRight: false),
                 ],
               ),
             ),
@@ -125,52 +115,22 @@ class TicketView extends StatelessWidget {
                 children: [
                   // show departure and destination with icons
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        "1 MAY",
-                        style: AppStyles.headLineStyle3.copyWith(
-                          color: Colors.white,
-                        ),
+                      AppColumnTextLayout(
+                        topText: ticket["date"],
+                        bottomText: "DATE",
+                        align: CrossAxisAlignment.start,
                       ),
-                      Expanded(child: Container()),
-                      Text(
-                        "08:00AM",
-                        style: AppStyles.headLineStyle3.copyWith(
-                          color: Colors.white,
-                        ),
+                      AppColumnTextLayout(
+                        topText: ticket["departure_time"],
+                        bottomText: "Departure time",
+                        align: CrossAxisAlignment.center,
                       ),
-                      Expanded(child: Container()),
-                      Text(
-                        "23",
-                        style: AppStyles.headLineStyle3.copyWith(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 3),
-                  // show departure and destination with time
-                  Row(
-                    children: [
-                      Text(
-                        "Date",
-                        style: AppStyles.headLineStyle3.copyWith(
-                          color: Colors.white,
-                        ),
-                      ),
-                      Expanded(child: Container()),
-                      Text(
-                        "Departure time",
-                        style: AppStyles.headLineStyle3.copyWith(
-                          color: Colors.white,
-                        ),
-                      ),
-                      Expanded(child: Container()),
-                      Text(
-                        "Number",
-                        style: AppStyles.headLineStyle3.copyWith(
-                          color: Colors.white,
-                        ),
+                      AppColumnTextLayout(
+                        topText: ticket["number"].toString(),
+                        bottomText: "Number",
+                        align: CrossAxisAlignment.end,
                       ),
                     ],
                   ),
