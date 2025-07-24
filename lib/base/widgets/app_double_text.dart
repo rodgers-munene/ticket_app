@@ -7,10 +7,12 @@ class AppDoubleText extends StatelessWidget {
     super.key,
     required this.bigText,
     required this.smallText,
+    required this.func
   });
 
   final String bigText;
   final String smallText;
+  final VoidCallback func;
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +21,7 @@ class AppDoubleText extends StatelessWidget {
       children: [
         Text(bigText, style: AppStyles.headLineStyle2),
         InkWell(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute<void>(
-                builder: (BuildContext context) => const AllTickets(),
-              ),
-            );
-          },
+          onTap: func,
           child: Text(
             smallText,
             style: AppStyles.textStyle.copyWith(color: AppStyles.primaryColor),

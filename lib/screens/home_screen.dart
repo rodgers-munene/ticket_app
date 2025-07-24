@@ -65,7 +65,13 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 40,),
-                AppDoubleText(bigText: "Upcoming Flights", smallText: "View all",),
+                AppDoubleText(
+                  bigText: "Upcoming Flights", 
+                  smallText: "View all",
+                  func: () {
+                    Navigator.pushNamed(context, "/all_tickets");
+                  }
+                ),
                 SizedBox(height: 20,),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
@@ -73,7 +79,15 @@ class HomeScreen extends StatelessWidget {
                     children: ticketList.take(2).map((item) => TicketView(ticket: item)).toList()
                     ,
                   ),
-                )
+                ),
+                SizedBox(height: 40,),
+                AppDoubleText(
+                  bigText: "Hotels", 
+                  smallText: "View all",
+                  func: () {
+                    Navigator.pushNamed(context, "/all_hotels");
+                  },
+                  )
               ],
             ),
           ),
