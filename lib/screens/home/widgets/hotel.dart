@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ticket_app/base/res/media.dart';
+// import 'package:ticket_app/base/res/media.dart';
 import 'package:ticket_app/base/res/styles/app_styles.dart';
 
 class Hotel extends StatelessWidget {
@@ -47,7 +47,7 @@ class Hotel extends StatelessWidget {
           ),
           SizedBox(height: 5),
           Text(
-            "${hotel['price']}/night",
+            "\$${hotel['price']}/night",
             style: AppStyles.headLineStyle1.copyWith(
               color: AppStyles.kakiColor,
             ),
